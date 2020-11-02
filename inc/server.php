@@ -6,15 +6,18 @@ if(empty($a)) session_start();
 
 $user_id= session_id();  // set your user id settings
 
+$numvotos=2; // 0,1 y 2, tres votos máximo
 
 // connect to database
-$conn = mysqli_connect('localhost', 'root', '', 'bootstrap_gallery');
+$conn = mysqli_connect('localhost', 'root', '', 'id11998558_bertateka');
 
 
 if (!$conn) {
     die("Error connecting to database: " . mysqli_connect_error($conn));
     exit();
 }
+
+
 
 // if user clicks like or dislike button
 if (isset($_POST['action'])) {
@@ -28,10 +31,10 @@ if (isset($_POST['action'])) {
                  WHERE user_id = '$user_id' AND rating_action='like'";
             $rs = mysqli_query($conn, $sql1);
             $result = mysqli_fetch_array($rs);
-            if ($result[0]>2) break;
-            $sql="INSERT INTO rating_info (user_id, banner_id, rating_action)
-             VALUES ('$user_id', $banner_id, 'like')
-             ON DUPLICATE KEY UPDATE rating_action='like'";
+            if ($result[0]>$numvotos)  break;
+              $sql="INSERT INTO rating_info (user_id, banner_id, rating_action)
+              VALUES ('$user_id', $banner_id, 'like')
+              ON DUPLICATE KEY UPDATE rating_action='like'";  
             break;
         case 'unlike':
             $sql="DELETE FROM rating_info WHERE user_id='$user_id' AND banner_id=$banner_id";
@@ -96,3 +99,10 @@ $result = mysqli_query($conn, $sql);
 // fetch all posts from database
 // return them as an associative array called $posts
 $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
+
+<script>
+function aviso() {
+    alert("El máximo de votos es <?php echo $numvotos; ?>");
+}
+</script>
