@@ -1,4 +1,7 @@
-<?php include('inc/server.php'); ?>
+<?php include('inc/server.php'); 
+$orden=1;
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,7 +34,7 @@
   	<a class="navbar-brand bertateka ml-2" href="index.php">Bertateka</a>
   </div>
   <div class="col-auto mx-auto">
-	<h4>GALERÍA DE IMÁGENES <span class="badge badge-warning" style="font-size: 0.5em;" >(puedes votar un máximo de 3)</span></h4></div>
+	<h4>GALERÍA DE IMÁGENES <span class="badge badge-warning" style="font-size: 0.5em;" >(puedes votar un máximo de <?php echo ($numvotos+1); ?>)</span></h4></div>
  </nav>
 
  <!-- EMPIEZA container -->
@@ -53,7 +56,7 @@
 <div class="card-deck mb-4">
 		<?php
 			$nums=1;
-			$sql_banner_top=mysqli_query($conn,"select * from banner where estado=1");
+			$sql_banner_top=mysqli_query($conn,"select * from banner where estado=1 and orden=$orden");
 			while($post=mysqli_fetch_array($sql_banner_top)){
 		?>
   <div class="card">
@@ -104,7 +107,6 @@
 
 
 </div>
-  <script src="js/scripts.js"></script>
-
+<script src="js/scripts.js"></script>
 </body>
 </html>

@@ -62,4 +62,4 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`usuario`, `password`, `nombre`, `email`, `role`) VALUES
-('profepaco', '62de1c3f1c4a2d217ef2a0eae28e8218', 'Francisco Pérez', 'rezguez@gmail.com', 'admin');
+('profepaco', '62de1c3f1c4a2d217ef2a0eae28e8218', 'admin', 'admin@correo.com', 'admin');
