@@ -32,7 +32,7 @@ if (isset($_POST['renovar'])) {
     }
     
     foreach ($elem_url as $value) {
-        $sql="INSERT INTO `banner`(`id`, `url_image`, `estado`, `orden`)  VALUES ('','$value',1,$orden)";
+        $sql="INSERT INTO `banner`(`url_image`, `estado`, `orden`)  VALUES ('$value',1,$orden)";
         $result = mysqli_query($conn, $sql);
     }
 }
